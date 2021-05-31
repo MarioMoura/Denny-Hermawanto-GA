@@ -6,7 +6,7 @@
 
 #define ITERATIONS 200
 
-#define NPOP 10
+#define NPOP 20
 
 // Length of the equation
 #define LENGTH 5
@@ -187,21 +187,40 @@ void mutate( struct Chromosome *population){
 }
 
 int print_result( struct Chromosome target ){
-	printf(" 1*%d  2*%d  3*%d  4*%d \n");
+	int i  = 0;
+	char signal = ' ';
+
+	if( weights[i] < 0 ) signal = '-';
+	printf("Result: %c %d*%d ", signal, target.Gene[i++],
+				weights[i] < 0 ? weights[i] * -1 : weights[i]
+			);
+	for (i = 1; i < LENGTH; ++i) {
+		if( weights[i] < 0 ) signal = '-';
+		else signal = '+';
+		printf("%c %d*%d ",
+				signal,
+				target.Gene[i],
+				weights[i] < 0 ? weights[i] * -1 : weights[i]
+			  );
+	}
+	printf("= %d\n", total );
 }
 
 int check( struct Chromosome *population){
 	int ret = 0;
 	for (int i = 0; i < NPOP; ++i)
-		if( population[i].fitness_raw == 0)
-			return 1;
-	return 0;
+		if( population[i].fitness_raw == 0){
+			ret = 1;
+			print_result( population[i] );
+		}
+	return ret ;
 }
 
 int main(){
 	srand(time(0));
 
 	struct Chromosome population[NPOP];
+	int done = 0;
 
 	for (int i = 0; i < NPOP; ++i) {
 		init_Chrmsm( population + i );
@@ -226,13 +245,14 @@ int main(){
 			eval_Fitness( population + i );
 		}
 		for (int i = 0; i < NPOP; ++i) {
-			printf("CHR %d :", i);
+			printf("CHR %3d :", i);
 			print_Chrmsm( population[i] );
 		}
-		if( check( population ) ) break;
+
+		done = check( population );
+		if( done ) break;
 	}
 
-	puts("eae");
 
 	return 0;
 }
