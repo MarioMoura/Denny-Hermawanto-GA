@@ -184,7 +184,6 @@ int crossOver(struct Chromosome *population){
 		/*printf("%f\n", R[i]);*/
 	/*}*/
 
-	printf("n_selected = %d\n", n_selected);
 	if(n_selected == 0) return 0;
 	if(n_selected == 1) return 0;
 	if(n_selected == 2){
@@ -220,13 +219,13 @@ int print_result( struct Chromosome target ){
 	char signal = ' ';
 
 	if( weights[i] < 0 ) signal = '-';
-	printf("Result: %c %d*%d ", signal, target.Gene[i++],
+	printf("Result: %c (%d)*%d ", signal, target.Gene[i++],
 				weights[i] < 0 ? weights[i] * -1 : weights[i]
 			);
 	for (i = 1; i < length; ++i) {
 		if( weights[i] < 0 ) signal = '-';
 		else signal = '+';
-		printf("%c %d*%d ",
+		printf("%c (%d)*%d ",
 				signal,
 				target.Gene[i],
 				weights[i] < 0 ? weights[i] * -1 : weights[i]
