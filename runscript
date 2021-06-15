@@ -1,0 +1,13 @@
+#!/bin/sh
+
+LIST="500 1000"
+ITER=100
+
+for NPOP in $LIST
+do
+	make $NPOP
+	for I in $(seq $ITER)
+	do
+		./run
+	done
+done

@@ -137,7 +137,7 @@ int select_pop( struct Chromosome *population ){
 		cpy_Chrmsm(swap_pop + i, population + roll );
 	}
 
-	putchar('\n');
+	/*putchar('\n');*/
 	for (int i = 0; i < npop; ++i)
 		/*population[i] = swap_pop[i];*/
 		cpy_Chrmsm( population + i, swap_pop + i);
@@ -148,8 +148,6 @@ int cross( int first, int second, struct Chromosome *population){
 	int roll = (rand() % 3) + 1;
 	for (int i = roll; i < length; i++)
 		population[first].Gene[i] = population[second].Gene[i];
-
-	printf("[%dx%d;%d]; ", first, second, roll);
 }
 
 int get_smaller(){
@@ -169,7 +167,6 @@ int get_smaller(){
 
 int crossOver(struct Chromosome *population){
 	gen_Random();
-	putchar('\n');
 	int n_selected = 0;
 	int *items = malloc( npop * sizeof( int ));
 	for (int i = 0; i < npop; ++i)
@@ -180,38 +177,30 @@ int crossOver(struct Chromosome *population){
 			items[ n_selected++ ] = i;
 		}
 	}
-	/*for (int i = 0; i < npop; ++i) {*/
-		/*printf("%f\n", R[i]);*/
-	/*}*/
 
 	if(n_selected == 0) return 0;
 	if(n_selected == 1) return 0;
 	if(n_selected == 2){
 		cross( items[0],items[1], population);
-		putchar('\n');
 		return 1;
 	}
 	for (int i = 0; i < n_selected; ++i) {
 		int second = get_smaller();
 		cross( items[i],second, population);
 	}
-		putchar('\n');
 	return 1;
 }
 
 
 void mutate( struct Chromosome *population){
-	putchar('\n');
 	for (int i = 0; i < npop; ++i) {
 		for (int j = 0; j < length; ++j) {
 			double roll = ( (double) rand() / RAND_MAX) ;
 			if( roll < MutRate ){
 				population[i].Gene[j] = gen_value();
-				printf("{%d>%d}; ", j, i);
 			}
 		}
 	}
-	putchar('\n');
 }
 
 int print_result( struct Chromosome target ){
