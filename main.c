@@ -21,7 +21,7 @@
 int main(){
 	srand(time(0));
 
-	FILE *csv_out = fopen(CSV_OUT".csv", "a");
+	FILE *csv_out = fopen("data/"CSV_OUT".csv", "a");
 
 	struct timespec begin, end;
 	int msbegin, msend;

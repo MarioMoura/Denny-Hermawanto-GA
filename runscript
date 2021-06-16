@@ -1,7 +1,7 @@
 #!/bin/sh
 
-LIST="500 1000"
-ITER=100
+LIST="10 50 200 500 1000"
+ITER=400
 
 for NPOP in $LIST
 do
@@ -9,5 +9,6 @@ do
 	for I in $(seq $ITER)
 	do
 		./run
-	done
+		sleep $(( 1 + $RANDOM % 3))
+done
 done
