@@ -3,57 +3,18 @@ import matplotlib.pyplot as plt
 import csv
 
 length = 500
-color = 'red'
-label = "10 Indivíduos"
-file = "10.csv"
-
-data = np.genfromtxt(file, delimiter=",", names=["x", "y", "z"] ,comments="#")
-mean = [np.mean(data['y'])] * len(data['z'])
-plt.plot( data['y'], color=color, label=label)
-plt.plot( mean, color=color, linestyle='dotted')
-plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color,
-             textcoords="offset points", size=8, va="center", xycoords='data')
-
-color = 'green'
-label = "50 Indivíduos"
-file = "50.csv"
-data = np.genfromtxt(file, delimiter=",", names=["x", "y", "z"] ,comments="#")
-mean = [np.mean(data['y'])] * len(data['z'])
-plt.plot( data['y'], color=color, label=label)
-plt.plot( mean, color=color, linestyle='dotted')
-plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color,
-             textcoords="offset points", size=8, va="center", xycoords='data')
-
-color = 'blue'
-label = "200 Indivíduos"
-file = "200.csv"
-data = np.genfromtxt(file, delimiter=",", names=["x", "y", "z"] ,comments="#")
-mean = [np.mean(data['y'])] * len(data['z'])
-plt.plot( data['y'], color=color, label=label)
-plt.plot( mean, color=color, linestyle='dotted')
-plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color,
-             textcoords="offset points", size=8, va="center", xycoords='data')
-
-color = 'magenta'
-label = "500 Indivíduos"
-file = "500.csv"
-data = np.genfromtxt(file, delimiter=",", names=["x", "y", "z"] ,comments="#")
-mean = [np.mean(data['y'])] * len(data['z'])
-plt.plot( data['y'], color=color, label=label)
-plt.plot( mean, color=color, linestyle='dotted')
-plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color,
-             textcoords="offset points", size=8, va="center", xycoords='data')
+color = ['red', 'green', 'blue', 'magenta', '#ff8509' ]
+label = [ "10", "50", "200", "500", "1000" ]
+file = [ "10.csv", "50.csv", "200.csv", "500.csv", "1000.csv" ]
 
 
-color = '#ff8509'
-label = "1000 Indivíduos"
-file = "1000.csv"
-data = np.genfromtxt(file, delimiter=",", names=["x", "y", "z"] ,comments="#")
-mean = [np.mean(data['y'])] * len(data['z'])
-plt.plot( data['y'], color=color, label=label)
-plt.plot( mean, color=color, linestyle='dotted')
-plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color,
-             textcoords="offset points", size=8, va="center", xycoords='data')
+for i in range(4,5):
+    data = np.genfromtxt(file[i], delimiter=",", names=["x", "y", "z"] ,comments="#")
+    mean = [np.mean(data['y'])] * len(data['z'])
+    plt.plot( data['y'], color=color[i], label=label[i] + " Indivíduos")
+    plt.plot( mean, color=color[i], linestyle='dotted')
+    plt.annotate(mean[0], xy=(length,mean[0]), xytext=(0,0), color=color[i],
+                 textcoords="offset points", size=8, va="center", xycoords='data')
 
 plt.title('Epocas')
 plt.ylabel('Numero de Epocas')
